@@ -26,6 +26,7 @@ Route::post('login', [PassportAuthController::class, 'login']);
   
 Route::middleware('auth:api')->group(function () {
     Route::get('get-user', [PassportAuthController::class, 'userInfo']);
+
     Route::get('get-payment-type', 'App\Http\Controllers\API\PaymentTypeController@getPaymentType');
     Route::post('add-payment-type', 'App\Http\Controllers\API\PaymentTypeController@store');
     Route::post('/update-payment-type/{id}', ['as' => 'update-payment-type', 'uses' => 'App\Http\Controllers\API\PaymentTypeController@update']);
@@ -40,5 +41,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('add-expense', 'App\Http\Controllers\API\ExpenseController@store');
     Route::post('/update-expense/{id}', ['as' => 'update-expense', 'uses' => 'App\Http\Controllers\API\ExpenseController@update']);
     Route::post('/delete-expense/{id}',['as' => 'delete-expense', 'uses' => 'App\Http\Controllers\API\ExpenseController@destroy']);
+
+    Route::get('get-income-category', 'App\Http\Controllers\API\IncomeCategoryController@index');
+    Route::post('add-income-category', 'App\Http\Controllers\API\IncomeCategoryController@store');
+    Route::post('/update-income-category/{id}', ['as' => 'update-income-category', 'uses' => 'App\Http\Controllers\API\IncomeCategoryController@update']);
+    Route::post('/delete-income-category/{id}',['as' => 'delete-income-category', 'uses' => 'App\Http\Controllers\API\IncomeCategoryController@destroy']);
 
 });
