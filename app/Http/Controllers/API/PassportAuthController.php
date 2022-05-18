@@ -39,7 +39,8 @@ class PassportAuthController
      */
     public function login(LoginRequest $request)
     {
-        $request->validated();
+        
+            $request->validated();
       
             $data = [
                 'email' => $request->email,
