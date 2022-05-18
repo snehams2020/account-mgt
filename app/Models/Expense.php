@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Collection;
 
-class ExpenseCategory extends Model
+class Expense extends Model
 {
 
-    protected $table = 'expense_categories';
+    protected $table = 'expenses';
 
     use HasFactory, SoftDeletes;
     /**
@@ -19,7 +19,7 @@ class ExpenseCategory extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'expensecategory_id','payment_type_id','description','amount','expense_date','expensecategory_id'
        
     ];
     public function getFiltered(array $filters): Collection

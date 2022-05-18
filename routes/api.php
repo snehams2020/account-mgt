@@ -30,4 +30,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('add-payment-type', 'App\Http\Controllers\API\PaymentTypeController@store');
     Route::post('/update-payment-type/{id}', ['as' => 'update-payment-type', 'uses' => 'App\Http\Controllers\API\PaymentTypeController@update']);
     Route::post('/delete-payment-type/{id}',['as' => 'delete-payment-type', 'uses' => 'App\Http\Controllers\API\PaymentTypeController@destroy']);
+
+    Route::get('get-expense-category', 'App\Http\Controllers\API\ExpenseCategoryController@index');
+    Route::post('add-expense-category', 'App\Http\Controllers\API\ExpenseCategoryController@store');
+    Route::post('/update-expense-category/{id}', ['as' => 'update-expense-category', 'uses' => 'App\Http\Controllers\API\ExpenseCategoryController@update']);
+    Route::post('/delete-expense-category/{id}',['as' => 'delete-expense-category', 'uses' => 'App\Http\Controllers\API\ExpenseCategoryController@destroy']);
+
 });
