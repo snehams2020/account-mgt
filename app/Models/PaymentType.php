@@ -23,7 +23,6 @@ class PaymentType extends Model
     ];
     public function getFiltered(array $filters): Collection
     {
-
         $paymentType=$this->get();
         return $paymentType;
     }

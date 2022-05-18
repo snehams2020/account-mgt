@@ -27,5 +27,6 @@ Route::post('login', [PassportAuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::get('get-user', [PassportAuthController::class, 'userInfo']);
     Route::get('get-payment-type', 'App\Http\Controllers\API\PaymentTypeController@getPaymentType');
+    Route::post('add-payment-type', 'App\Http\Controllers\API\PaymentTypeController@store');
 
 });

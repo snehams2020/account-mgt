@@ -12,10 +12,14 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\PaymentType\IndexRequest;
+use App\Http\Requests\PaymentType\StoreRequest;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
 use App\Http\Resources\PaymentTypeCollection;
+use App\Http\Resources\PaymentTypeResource;
+
 
 class PaymentTypeController extends Controller {
 
@@ -35,6 +39,19 @@ class PaymentTypeController extends Controller {
     {
         return new PaymentTypeCollection($this->paymentType->getFiltered($request->validated()));
     }
+
+     /**
+     * @return Application|PaymentTypeResource
+     * @throws Exception
+     */
+
+    public function store(PaymentType $payment, StoreRequest $request):PaymentTypeResource
+    {
+        $paymentTypes =$payment->create($request->validated());
+        return new PaymentTypeResource($paymentTypes);
+    }
+
+   
     /**
      * @param $permission
      * @return JsonResponse
