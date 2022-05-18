@@ -36,4 +36,9 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/update-expense-category/{id}', ['as' => 'update-expense-category', 'uses' => 'App\Http\Controllers\API\ExpenseCategoryController@update']);
     Route::post('/delete-expense-category/{id}',['as' => 'delete-expense-category', 'uses' => 'App\Http\Controllers\API\ExpenseCategoryController@destroy']);
 
+    Route::get('get-expense', 'App\Http\Controllers\API\ExpenseController@index');
+    Route::post('add-expense', 'App\Http\Controllers\API\ExpenseController@store');
+    Route::post('/update-expense/{id}', ['as' => 'update-expense', 'uses' => 'App\Http\Controllers\API\ExpenseController@update']);
+    Route::post('/delete-expense/{id}',['as' => 'delete-expense', 'uses' => 'App\Http\Controllers\API\ExpenseController@destroy']);
+
 });
