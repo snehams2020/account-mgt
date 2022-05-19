@@ -37,4 +37,35 @@ class Income extends Model
         $income=$this->with('incomeCategory','paymentType')->get();
         return $income;
     }
+    public function getFilteredIncomeReport(array $filters): Collection
+    {
+        $incomeDate=!empty($filters['income_date'])?$filters['income_date']:"";
+        $category=!empty($filters['category'])?$filters['category']:"";
+        $paymentType=!empty($filters['payment_type'])?$filters['payment_type']:"";
+       
+        $income=$this->with('incomeCategory','paymentType');
+
+        if(!empty($category) && $category!=""){
+            $income=$income->whereHas('incomeCategory', function($q) use ($category){
+                $q->where('name','like',$category);
+                $q->orWhere('id',$category);
+
+            });
+        }
+        if(!empty($paymentType) && $paymentType!=""){
+
+            $income=$income->whereHas('paymentType', function($q) use ($paymentType){
+                $q->where('name','like',$paymentType);
+                $q->orWhere('id',$paymentType);
+
+            });
+        }
+        if(!empty($incomeDate) && $incomeDate!=""){
+            $income=$income->whereDate('income_date',date('Y-m-d',strtotime($incomeDate)));
+
+        }
+        $income=$income->get();
+      
+        return $income;
+    }
 }

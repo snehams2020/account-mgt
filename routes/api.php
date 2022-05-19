@@ -51,5 +51,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('add-income', 'App\Http\Controllers\API\IncomeController@store');
     Route::post('/update-income/{id}', ['as' => 'update-income', 'uses' => 'App\Http\Controllers\API\IncomeController@update']);
     Route::post('/delete-income/{id}',['as' => 'delete-income', 'uses' => 'App\Http\Controllers\API\IncomeController@destroy']);
+   
+    Route::get('get-expense-report', 'App\Http\Controllers\API\ReportController@getExpenseReport');
+    Route::get('get-income-report', 'App\Http\Controllers\API\ReportController@getIncomeReport');
 
 });

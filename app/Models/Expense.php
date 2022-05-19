@@ -34,7 +34,38 @@ class Expense extends Model
 
     public function getFiltered(array $filters): Collection
     {
-        $expenseCategory=$this->with('expenseCategory','paymentType')->get();
-        return $expenseCategory;
+        $expense=$this->with('expenseCategory','paymentType')->get();
+        return $expense;
+    }
+    public function getFilteredExpenseReport(array $filters): Collection
+    {
+        $expenseDate=!empty($filters['expense_date'])?$filters['expense_date']:"";
+        $category=!empty($filters['category'])?$filters['category']:"";
+        $paymentType=!empty($filters['payment_type'])?$filters['payment_type']:"";
+       
+        $expense=$this->with('expenseCategory','paymentType');
+
+        if(!empty($category) && $category!=""){
+            $expense=$expense->whereHas('expenseCategory', function($q) use ($category){
+                $q->where('name','like',$category);
+                $q->orWhere('id',$category);
+
+            });
+        }
+        if(!empty($paymentType) && $paymentType!=""){
+
+            $expense=$expense->whereHas('paymentType', function($q) use ($paymentType){
+                $q->where('name','like',$paymentType);
+                $q->orWhere('id',$paymentType);
+
+            });
+        }
+        if(!empty($expenseDate) && $expenseDate!=""){
+            $expense=$expense->whereDate('expense_date',date('Y-m-d',strtotime($expenseDate)));
+
+        }
+        $expense=$expense->get();
+      
+        return $expense;
     }
 }
