@@ -54,5 +54,7 @@ Route::middleware('auth:api')->group(function () {
    
     Route::get('get-expense-report', 'App\Http\Controllers\API\ReportController@getExpenseReport');
     Route::get('get-income-report', 'App\Http\Controllers\API\ReportController@getIncomeReport');
+    Route::get('get-balance-sheet', 'App\Http\Controllers\API\ReportController@getBalanceSheet');
+
 
 });

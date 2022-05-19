@@ -25,7 +25,7 @@ class Income extends Model
     ];
     public function incomeCategory(): belongsTo
     {
-        return $this->belongsTo(ExpenseCategory::class,'incomecategory_id','id');
+        return $this->belongsTo(IncomeCategory::class,'incomecategory_id','id');
     }
     public function paymentType(): belongsTo
     {

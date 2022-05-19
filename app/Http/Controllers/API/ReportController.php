@@ -14,18 +14,20 @@ use Illuminate\Support\Arr;
 use Carbon\Carbon;
 use App\Http\Resources\ExpenseReportCollection;
 use App\Http\Resources\IncomeReportCollection;
+use App\Http\Resources\BalanceSheetCollection;
 use App\Models\Income;
-
+use App\Services\BalanceSheetService;
 class ReportController extends Controller {
 
     protected Expense $expense;
+    protected Income $income;
+    protected BalanceSheetService $balanceSheetService;
 
-    public function __construct(Expense $expense,Income $income)
+    public function __construct(Expense $expense,Income $income,BalanceSheetService $balanceSheetService)
     {
         $this->expense = $expense;
         $this->income = $income;
-
-      
+        $this->balanceSheetService = $balanceSheetService;      
     }
    
     /**
@@ -44,6 +46,14 @@ class ReportController extends Controller {
     public function getIncomeReport(Request $request): IncomeReportCollection
     {
      return new IncomeReportCollection($this->income->getFilteredIncomeReport((array)request()->all()));
+    }
+    /**
+     * @return Application|Collection
+     * @throws Exception
+     */
+    public function getBalanceSheet(Request $request): BalanceSheetCollection
+    {
+     return new BalanceSheetCollection($this->balanceSheetService->balanceSheet((array)request()->all()));
     }
   
 }
