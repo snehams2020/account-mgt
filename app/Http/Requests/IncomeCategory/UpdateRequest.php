@@ -15,7 +15,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'sometimes|string|max:255',         
+            'name' => 'sometimes|string|max:255',  
+            'id' => 'required|integer',
+       
         ];
     }
     public function failedValidation(Validator $validator)

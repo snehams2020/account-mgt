@@ -20,7 +20,9 @@ class UpdateRequest extends FormRequest
             'amount' => 'sometimes',         
             'expense_date' => 'nullable',         
             'payment_type_id' => 'sometimes',   
-            'expensecategory_id' => 'sometimes',          
+            'expensecategory_id' => 'sometimes', 
+            'id' => 'required|integer',
+         
         ];
     }
     public function failedValidation(Validator $validator)

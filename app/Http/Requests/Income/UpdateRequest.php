@@ -20,7 +20,9 @@ class UpdateRequest extends FormRequest
             'amount' => 'sometimes',         
             'income_date' => 'nullable',         
             'payment_type_id' => 'sometimes',   
-            'incomecategory_id' => 'sometimes',          
+            'incomecategory_id' => 'sometimes',   
+            'id' => 'required|integer',
+       
         ];
     }
     public function failedValidation(Validator $validator)

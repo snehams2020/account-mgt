@@ -17,7 +17,8 @@ class DestroyRequest extends FormRequest
     {
         return [
            
-         
+            'id' => 'required|integer',
+
         ];
     }
     public function failedValidation(Validator $validator)
