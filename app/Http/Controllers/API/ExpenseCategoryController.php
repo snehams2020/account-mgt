@@ -31,8 +31,9 @@ class ExpenseCategoryController extends Controller {
     }
    
     /**
-     * @return Application|Collection
-     * @throws Exception
+    * List the  expense category collection '
+    * @param  App\Http\Requests\Article\IndexRequest $request
+    * @return App\Http\Resources\ExpenseCategoryCollection
      */
      public function index(IndexRequest $request): ExpenseCategoryCollection
     {
@@ -40,7 +41,8 @@ class ExpenseCategoryController extends Controller {
     }
 
      /**
-     * @return Application|PaymentTypeResource
+    * Store the  expense category collection '
+    * @return Application|ExpenseCategoryResource
      * @throws Exception
      */
 
@@ -53,8 +55,7 @@ class ExpenseCategoryController extends Controller {
     }
 
   /**
-     * Update the specified resource in storage.
-     *
+     * Update the  expense category collection '
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -68,8 +69,7 @@ class ExpenseCategoryController extends Controller {
         ;
     }
       /**
-     * Delete the specified resource in storage.
-     *
+     * Delete the specified expense category.
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response

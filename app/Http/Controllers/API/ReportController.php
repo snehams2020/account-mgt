@@ -31,7 +31,8 @@ class ReportController extends Controller {
     }
    
     /**
-     * @return Application|Collection
+     * List the expense report
+     * @return Application|ExpenseReportCollection
      * @throws Exception
      */
     public function getExpenseReport(Request $request): ExpenseReportCollection
@@ -40,7 +41,8 @@ class ReportController extends Controller {
     }
 
    /**
-     * @return Application|Collection
+    * List the income report
+     * @return Application|IncomeReportCollection
      * @throws Exception
      */
     public function getIncomeReport(Request $request): IncomeReportCollection
@@ -48,7 +50,8 @@ class ReportController extends Controller {
      return new IncomeReportCollection($this->income->getFilteredIncomeReport((array)request()->all()));
     }
     /**
-     * @return Application|Collection
+     * List the balance sheet
+     * @return Application|BalanceSheetCollection
      * @throws Exception
      */
     public function getBalanceSheet(Request $request): BalanceSheetCollection

@@ -30,7 +30,8 @@ class IncomeCategoryController extends Controller {
     }
    
     /**
-     * @return Application|Collection
+     * List the  income category collection '
+     * @return Application|IncomeCategoryCollection
      * @throws Exception
      */
      public function index(IndexRequest $request): IncomeCategoryCollection
@@ -39,6 +40,7 @@ class IncomeCategoryController extends Controller {
     }
 
      /**
+      * Store the  income category  collection '
      * @return Application|IncomeCategoryResource
      * @throws Exception
      */
@@ -52,8 +54,7 @@ class IncomeCategoryController extends Controller {
     }
 
   /**
-     * Update the specified resource in storage.
-     *
+     * Update the specified  income category resource .
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -69,8 +70,7 @@ class IncomeCategoryController extends Controller {
 
     }
       /**
-     * Delete the specified resource in storage.
-     *
+     * Delete the specified  income category  resource .
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response

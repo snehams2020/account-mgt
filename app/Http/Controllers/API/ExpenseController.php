@@ -31,7 +31,8 @@ class ExpenseController extends Controller {
     }
    
     /**
-     * @return Application|Collection
+     * List the  expense collection '
+     * @return Application|ExpenseCollection
      * @throws Exception
      */
      public function index(IndexRequest $request): ExpenseCollection
@@ -40,6 +41,7 @@ class ExpenseController extends Controller {
     }
 
      /**
+      * Store the  expense  collection '
      * @return Application|PaymentTypeResource
      * @throws Exception
      */
@@ -53,8 +55,7 @@ class ExpenseController extends Controller {
     }
 
   /**
-     * Update the specified resource in storage.
-     *
+     * update the  expense  resource '
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -69,8 +70,7 @@ class ExpenseController extends Controller {
 
     }
       /**
-     * Delete the specified resource in storage.
-     *
+     * Delete the specified  expense  resource .
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response

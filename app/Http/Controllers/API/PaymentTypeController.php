@@ -33,7 +33,8 @@ class PaymentTypeController extends Controller {
     }
    
     /**
-     * @return Application|Collection
+     * List the  payment type  collection '
+     * @return Application|PaymentTypeCollection
      * @throws Exception
      */
      public function getPaymentType(IndexRequest $request): PaymentTypeCollection
@@ -44,6 +45,7 @@ class PaymentTypeController extends Controller {
     }
 
      /**
+      * Store the  payment type   collection '
      * @return Application|PaymentTypeResource
      * @throws Exception
      */
@@ -57,8 +59,7 @@ class PaymentTypeController extends Controller {
     }
 
   /**
-     * Update the specified resource in storage.
-     *
+     * Update the specified payment type resource.
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,8 +73,7 @@ class PaymentTypeController extends Controller {
 
     }
       /**
-     * Delete the specified resource in storage.
-     *
+     * Delete the specified payment type resource.
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
