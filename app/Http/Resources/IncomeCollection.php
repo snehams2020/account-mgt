@@ -11,8 +11,11 @@ class IncomeCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
+            'status' => true,
+            'statusCode'=>200,
             'income' => $this->map(function ($item, $key) {
                 return [
+                    
                     'id' => $item->id,
                     'description' => $item->description,
                     'amount' => $item->amount ,

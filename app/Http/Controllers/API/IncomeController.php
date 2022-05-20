@@ -47,7 +47,9 @@ class IncomeController extends Controller {
     public function store(Income $income, StoreRequest $request):IncomeResource
     {
         $income = $income->create($request->validated());
-        return new IncomeResource($income);
+        return (new IncomeResource($income))      
+           ->additional(['status' =>"true","statusCode"=>200]);
+
     }
 
   /**
@@ -62,7 +64,9 @@ class IncomeController extends Controller {
         $id     =   request('id');
         $incom   =  $income->find(request('id'))->update($request->validated());
 
-        return new IncomeResource($income->find(request('id')));
+        return (new IncomeResource($income->find(request('id'))))   
+             ->additional(['status' =>"true","statusCode"=>200]);
+
     }
       /**
      * Delete the specified resource in storage.
@@ -72,10 +76,20 @@ class IncomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Income $income, DestroyRequest $request): void
+    public function destroy(Income $income, DestroyRequest $request)
     {
         $id     =   request('id');
-        $income->find($id)->delete();
+        $del= $income->find($id)->delete();
+        if ($del) {
+            $response['status'] = true;
+            $response['message'] = 'Success';
+            $statusCode=200;
+        } elseif (empty($del)) {
+            $response['status'] = true;
+            $response['message'] = 'Not Able to delete';
+            $statusCode=200;
+        }
+        return response()->json($response, $statusCode);
     }
   
 }

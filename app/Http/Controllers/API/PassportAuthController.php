@@ -39,20 +39,34 @@ class PassportAuthController
      */
     public function login(LoginRequest $request)
     {
+        $response = ['status' => false, 'message' => 'Failed', 'data' => []];
+        $statusCode = 200;
         
             $request->validated();
-      
+    
             $data = [
                 'email' => $request->email,
                 'password' => $request->password
             ];
     
-            if (auth()->attempt($data)) {
-                $token = auth()->user()->createToken('Laravel-9-Passport-Auth')->accessToken;
-                return response()->json(['token' => $token], 200);
-            } else {
-                return response()->json(['error' => 'Unauthorised'], 401);
-            }
+            // if (auth()->attempt($data)) {
+            //     $token = auth()->user()->createToken('Laravel-9-Passport-Auth')->accessToken;
+            //     return response()->json(['token' => $token], 200);
+            // } else {
+            //     return response()->json(['error' => 'Unauthorised'], 401);
+            // }
+
+            
+        if (auth()->attempt($data)) {
+            $response['status'] = true;
+            $response['message'] = 'Success';
+            $response['data']['token'] = auth()->user()->createToken('Laravel-9-Passport-Auth')->accessToken;;
+        } elseif (empty($data)) {
+            $response['status'] = true;
+            $response['message'] = 'Not Able to login';
+        }
+        return response()->json($response, $statusCode);
+
         
     }
  

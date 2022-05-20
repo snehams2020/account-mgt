@@ -11,8 +11,11 @@ class ExpenseReportCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
+            'status' => true,
+            'statusCode'=>200,
             'expenseReport' => $this->map(function ($item, $key) {
                 return [
+                   
                     'description' => $item->description,
                     'amount' => $item->amount ,
                     'expense_date' => date('d-m-Y',strtotime($item->expense_date)),

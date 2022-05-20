@@ -47,7 +47,9 @@ class ExpenseController extends Controller {
     public function store(Expense $expense, StoreRequest $request):ExpenseResource
     {
         $expense = $expense->create($request->validated());
-        return new ExpenseResource($expense);
+        return (new ExpenseResource($expense))       
+         ->additional(['status' =>"true","statusCode"=>200]);
+
     }
 
   /**
@@ -62,7 +64,9 @@ class ExpenseController extends Controller {
         $id     =   request('id');
         $expen   =  $expense->find(request('id'))->update($request->validated());
 
-        return new ExpenseResource($expense->find(request('id')));
+        return (new ExpenseResource($expense->find(request('id'))))   
+             ->additional(['status' =>"true","statusCode"=>200]);
+
     }
       /**
      * Delete the specified resource in storage.
@@ -72,10 +76,21 @@ class ExpenseController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Expense $expense, DestroyRequest $request): void
+    public function destroy(Expense $expense, DestroyRequest $request)
     {
         $id     =   request('id');
-        $expense->find($id)->delete();
+        $del    =   $expense->find($id)->delete();
+        if ($del) {
+            $response['status'] = true;
+            $response['message'] = 'Success';
+            $statusCode=200;
+        } elseif (empty($del)) {
+            $response['status'] = true;
+            $response['message'] = 'Not Able to delete';
+            $statusCode=200;
+        }
+        return response()->json($response, $statusCode);
+
     }
   
 }

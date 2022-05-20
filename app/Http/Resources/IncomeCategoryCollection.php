@@ -11,6 +11,8 @@ class IncomeCategoryCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
+            'status' => true,
+            'statusCode'=>200,
             'incomeCategory' => $this->collection,
             'incomeCategoryCount' => $this->count()
         ];

@@ -11,8 +11,11 @@ class IncomeReportCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
+            'status' => true,
+            'statusCode'=>200,
             'incomeReport' => $this->map(function ($item, $key) {
                 return [
+                   
                     'description' => $item->description,
                     'amount' => $item->amount ,
                     'income_date' => date('d-m-Y',strtotime($item->income_date)),

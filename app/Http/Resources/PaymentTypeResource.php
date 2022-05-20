@@ -6,11 +6,15 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PaymentTypeResource extends JsonResource
 {
+    //public static $status =   "Success";
+    //public static $statuscode =   200;
     public static $wrap = 'paymentType';
 
     public function toArray($request): array
     {
         return [
+
+           
             'name' => $this->name,
             'createdAt' => $this->created_at,
             'updatedAt' => $this->updated_at,

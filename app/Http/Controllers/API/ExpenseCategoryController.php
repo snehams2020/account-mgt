@@ -47,7 +47,9 @@ class ExpenseCategoryController extends Controller {
     public function store(ExpenseCategory $expenseCategory, StoreRequest $request):ExpenseCategoryResource
     {
         $expenseCategory = $expenseCategory->create($request->validated());
-        return new ExpenseCategoryResource($expenseCategory);
+        return (new ExpenseCategoryResource($expenseCategory))              
+        ->additional(['status' =>"true","statusCode"=>200]);
+
     }
 
   /**
@@ -60,8 +62,10 @@ class ExpenseCategoryController extends Controller {
     public function update(ExpenseCategory $expenseCategory, UpdateRequest $request): ExpenseCategoryResource
     {
         $id     =   request('id');
-        $pay    =  $expenseCategory->find(request('id'))->update($request->validated());
-        return new ExpenseCategoryResource($expenseCategory->find( $id));
+        $pay    =  $expenseCategory->where('id',$id)->update($request->validated());
+        return (new ExpenseCategoryResource($expenseCategory->find($id)))       
+        ->additional(['status' =>"true","statusCode"=>200]);
+        ;
     }
       /**
      * Delete the specified resource in storage.
@@ -71,11 +75,22 @@ class ExpenseCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(ExpenseCategory $expenseCategory, DestroyRequest $request): void
+    public function destroy(ExpenseCategory $expenseCategory, DestroyRequest $request)
     {
         $id     =   request('id');
 
-        $expenseCategory->find($id)->delete();
+       $del= $expenseCategory->find($id)->delete();
+        if ($del) {
+            $response['status'] = true;
+            $response['message'] = 'Success';
+            $statusCode=200;
+        } elseif (empty($del)) {
+            $response['status'] = true;
+            $response['message'] = 'Not Able to delete';
+            $statusCode=200;
+        }
+        return response()->json($response, $statusCode);
+
     }
   
 }

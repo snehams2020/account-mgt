@@ -46,7 +46,9 @@ class IncomeCategoryController extends Controller {
     public function store(IncomeCategory $incomeCategory, StoreRequest $request):IncomeCategoryResource
     {
         $incomeCategory = $incomeCategory->create($request->validated());
-        return new IncomeCategoryResource($incomeCategory);
+        return (new IncomeCategoryResource($incomeCategory))    
+             ->additional(['status' =>"true","statusCode"=>200]);
+
     }
 
   /**
@@ -61,7 +63,10 @@ class IncomeCategoryController extends Controller {
         $id     =   request('id');
         $income  =  $incomeCategory->find(request('id'))->update($request->validated());
 
-        return new IncomeCategoryResource($incomeCategory->find(request('id')));
+        return (new IncomeCategoryResource($incomeCategory->find(request('id')))) 
+                  ->additional(['status' =>"true","statusCode"=>200]);
+
+
     }
       /**
      * Delete the specified resource in storage.
@@ -71,10 +76,21 @@ class IncomeCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(IncomeCategory $incomeCategory, DestroyRequest $request): void
+    public function destroy(IncomeCategory $incomeCategory, DestroyRequest $request)
     {
         $id     =   request('id');
-        $incomeCategory->find($id)->delete();
+        $del=$incomeCategory->find($id)->delete();
+        if ($del) {
+            $response['status'] = true;
+            $response['message'] = 'Success';
+            $statusCode=200;
+        } elseif (empty($del)) {
+            $response['status'] = true;
+            $response['message'] = 'Not Able to delete';
+            $statusCode=200;
+        }
+        return response()->json($response, $statusCode);
+
     }
   
 }

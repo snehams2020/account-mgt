@@ -12,6 +12,8 @@ class BalanceSheetCollection extends ResourceCollection
     {
 
         return [
+            'status' => true,
+            'statusCode'=>200,
             'balanceSheet' => $this->collection,
             'balanceSheetCount' => $this->count()
         ];

@@ -11,8 +11,11 @@ class ExpenseCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
+            'status' => true,
+            'statusCode'=>200,
             'expense' => $this->map(function ($item, $key) {
                 return [
+                   
                     'id' => $item->id,
                     'description' => $item->description,
                     'amount' => $item->amount ,

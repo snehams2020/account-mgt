@@ -38,7 +38,9 @@ class PaymentTypeController extends Controller {
      */
      public function getPaymentType(IndexRequest $request): PaymentTypeCollection
     {
+       
         return new PaymentTypeCollection($this->paymentType->getFiltered($request->validated()));
+        
     }
 
      /**
@@ -49,7 +51,9 @@ class PaymentTypeController extends Controller {
     public function store(PaymentType $payment, StoreRequest $request):PaymentTypeResource
     {
         $paymentTypes =$payment->create($request->validated());
-        return new PaymentTypeResource($paymentTypes);
+        return (new PaymentTypeResource($paymentTypes) ) 
+                ->additional(['status' =>"true","statusCode"=>200]);
+
     }
 
   /**
@@ -63,7 +67,9 @@ class PaymentTypeController extends Controller {
     {
         $id=request('id');
         $pay =  $payment->find(request('id'))->update($request->validated());
-        return new PaymentTypeResource($payment->find( $id));
+        return (new PaymentTypeResource($payment->find( $id)))
+                   ->additional(['status' =>"true","statusCode"=>200]);
+
     }
       /**
      * Delete the specified resource in storage.
@@ -73,11 +79,24 @@ class PaymentTypeController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(PaymentType $payment, DestroyRequest $request): void
+    public function destroy(PaymentType $payment, DestroyRequest $request)
     {
         $id=request('id');
 
-        $payment->find($id)->delete();
+        $del=$payment->find($id)->delete();
+        if ( $del) {
+            $response['status'] = true;
+            $response['message'] = 'Success';
+            $statusCode=200;
+        } elseif (empty($data)) {
+            $response['status'] = true;
+            $response['message'] = 'Not Able to delete';
+            $statusCode=200;
+        }
+        return response()->json($response, $statusCode);
+
+
+
     }
   
 }

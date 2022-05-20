@@ -10,7 +10,10 @@ class PaymentTypeCollection extends ResourceCollection
 
     public function toArray($request): array
     {
+        
         return [
+            'status' => true,
+            'statusCode'=>200,
             'paymentType' => $this->collection,
             'paymentTypeCount' => $this->count()
         ];

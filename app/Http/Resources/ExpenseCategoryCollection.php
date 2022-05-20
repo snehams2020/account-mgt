@@ -11,6 +11,8 @@ class ExpenseCategoryCollection extends ResourceCollection
     public function toArray($request): array
     {
         return [
+            'status' => true,
+            'statusCode'=>200,
             'expenseCategory' => $this->collection,
             'expenseCategoryCount' => $this->count()
         ];
