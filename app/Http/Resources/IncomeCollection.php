@@ -21,8 +21,8 @@ class IncomeCollection extends ResourceCollection
                     'amount' => $item->amount ,
                     'income_date' => $item->income_date,
                     'created_at' => $item->created_at,
-                    'incomeCategory' => $item->incomeCategory->name,
-                    'paymentType' => $item->paymentType->name,
+                    'incomeCategory' => !empty($item->incomeCategory)?$item->incomeCategory->name:"",
+                    'paymentType' => !empty($item->paymentType)?$item->paymentType->name:"",
                    
                    
                 ];

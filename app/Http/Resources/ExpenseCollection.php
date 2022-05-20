@@ -21,8 +21,8 @@ class ExpenseCollection extends ResourceCollection
                     'amount' => $item->amount ,
                     'expense_date' => $item->expense_date,
                     'created_at' => $item->created_at,
-                    'expenseCategory' => $item->expenseCategory->name,
-                    'paymentType' => $item->paymentType->name,
+                    'expenseCategory' => !empty($item->expenseCategory)?$item->expenseCategory->name:"",
+                    'paymentType' => !empty($item->paymentType)?$item->paymentType->name:"",
                    
                    
                 ];
