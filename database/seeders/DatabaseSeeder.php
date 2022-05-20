@@ -18,18 +18,10 @@ class DatabaseSeeder extends Seeder
         UserSeeder::class,
         PaymentTypeSeeder::class,
         ExpenseCategorySeeder::class,
-
-
         ExpenseSeeder::class,
         IncomeCategoriesSeeder::class,
-
         IncomeSeeder::class,
-       
-
-
-     
-
-        ]);
+    ]);
 
          \App\Models\User::factory(10)->create();
     }
