@@ -40,6 +40,14 @@ class ExpenseCategoryController extends Controller {
         return new ExpenseCategoryCollection($this->expenseCategory->getFiltered($request->validated()));
     }
 
+    public function show(ExpenseCategory $expenseCategory):ExpenseCategoryResource
+    {
+        
+        return (new ExpenseCategoryResource($expenseCategory->find(request('id'))))       
+        ->additional(['status' =>"true","statusCode"=>200]);
+
+
+    }
      /**
     * Store the  expense category collection '
     * @return Application|ExpenseCategoryResource

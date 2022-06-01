@@ -16,6 +16,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id'=>"nullable",
+
             'description' => 'required|string',  
             'amount' => 'required',         
             'income_date' => 'nullable|date_format:Y-m-d',         

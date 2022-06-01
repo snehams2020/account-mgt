@@ -38,10 +38,10 @@ class BalanceSheetService
         if(!empty($expense)){
         foreach($expense as $key=>$exp){
             $data[$key]['date']=date('d-m-Y',strtotime($exp->expense_date));
-            $data[$key]['category']=$exp->expenseCategory->name;
+            $data[$key]['category']=!empty($exp->expenseCategory->name)?$exp->expenseCategory->name:"";
             $data[$key]['credit']=0;
             $data[$key]['debit']=$exp->amount;
-            $data[$key]['paymentType']=$exp->paymentType->name;
+            $data[$key]['paymentType']=!empty($exp->paymentType->name)?$exp->paymentType->name:"";
 
 
         }
@@ -49,10 +49,10 @@ class BalanceSheetService
         if(!empty($income)){
         foreach($income as $key=>$inc){
             $data1[$key]['date']=date('d-m-Y',strtotime($inc->income_date));
-            $data1[$key]['category']=$inc->incomeCategory->name;
+            $data1[$key]['category']=!empty($inc->incomeCategory->name)?$inc->incomeCategory->name:"";
             $data1[$key]['debit']=0;
             $data1[$key]['credit']=$inc->amount;
-            $data1[$key]['paymentType']=$inc->paymentType->name;
+            $data1[$key]['paymentType']=!empty($inc->paymentType->name)?$inc->paymentType->name:"";
 
 
         }

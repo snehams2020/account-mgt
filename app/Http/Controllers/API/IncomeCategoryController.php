@@ -38,7 +38,13 @@ class IncomeCategoryController extends Controller {
     {
         return new IncomeCategoryCollection($this->incomeCategory->getFiltered($request->validated()));
     }
+    public function show(IncomeCategory $incomeCategory):IncomeCategoryResource
+    {
+        return (new IncomeCategoryResource($incomeCategory->find(request('id'))))   
+        ->additional(['status' =>"true","statusCode"=>200]);
 
+
+    }
      /**
       * Store the  income category  collection '
      * @return Application|IncomeCategoryResource

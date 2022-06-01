@@ -15,12 +15,13 @@ class ExpenseReportCollection extends ResourceCollection
             'statusCode'=>200,
             'expenseReport' => $this->map(function ($item, $key) {
                 return [
-                   
+                  //  'id' => $this->id,
+
                     'description' => $item->description,
                     'amount' => $item->amount ,
                     'expense_date' => date('d-m-Y',strtotime($item->expense_date)),
-                    'expenseCategory' => $item->expenseCategory->name,
-                    'paymentType' => $item->paymentType->name,
+                    'expenseCategory' => !empty($item->expenseCategory->name)?$item->expenseCategory->name:"",
+                    'paymentType' => !empty($item->paymentType->name)?$item->paymentType->name:"",
                    
                    
                 ];

@@ -16,6 +16,8 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id'=>"nullable",
+
             'description' => 'sometimes|string',  
             'amount' => 'sometimes',         
             'expense_date' => 'nullable',         

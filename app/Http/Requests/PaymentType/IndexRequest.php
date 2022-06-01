@@ -16,6 +16,8 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'id'=>"nullable",
+
             'name' => 'sometimes|string',
          
         ];

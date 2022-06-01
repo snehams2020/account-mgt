@@ -40,9 +40,17 @@ class IncomeController extends Controller {
         return new IncomeCollection($this->income->getFiltered($request->validated()));
     }
 
+    public function show(Income $income):IncomeResource
+    {
+        return (new IncomeResource($income->find(request('id'))))   
+        ->additional(['status' =>"true","statusCode"=>200]);
+
+
+    }
+
      /**
       * Store the  income   collection '
-     * @return Application|PaymentTypeResource
+     * @return Application|IncomeResource
      * @throws Exception
      */
 

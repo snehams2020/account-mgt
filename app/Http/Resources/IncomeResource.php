@@ -11,6 +11,8 @@ class IncomeResource extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' => $this->id,
+
             'incomecategory_id' => $this->incomecategory_id,
             'payment_type_id' => $this->payment_type_id,
             'description' => $this->description,

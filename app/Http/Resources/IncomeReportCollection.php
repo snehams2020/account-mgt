@@ -15,12 +15,13 @@ class IncomeReportCollection extends ResourceCollection
             'statusCode'=>200,
             'incomeReport' => $this->map(function ($item, $key) {
                 return [
-                   
+                   // 'id' => $this->id,
+
                     'description' => $item->description,
                     'amount' => $item->amount ,
                     'income_date' => date('d-m-Y',strtotime($item->income_date)),
-                    'incomeCategory' => $item->incomeCategory->name,
-                    'paymentType' => $item->paymentType->name,
+                    'incomeCategory' => !empty($item->incomeCategory->name)?$item->incomeCategory->name:"",
+                    'paymentType' => !empty($item->paymentType->name)?$item->paymentType->name:"",
                    
                    
                 ];

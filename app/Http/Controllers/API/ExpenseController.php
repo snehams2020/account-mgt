@@ -39,6 +39,19 @@ class ExpenseController extends Controller {
     {
         return new ExpenseCollection($this->expense->getFiltered($request->validated()));
     }
+     /**
+      * Store the  expense  collection '
+     * @return Application|PaymentTypeResource
+     * @throws Exception
+     */
+
+    public function show(Expense $expense):ExpenseResource
+    {
+        return (new ExpenseResource($expense->find(request('id'))))   
+        ->additional(['status' =>"true","statusCode"=>200]);
+
+
+    }
 
      /**
       * Store the  expense  collection '

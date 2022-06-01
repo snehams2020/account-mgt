@@ -31,6 +31,8 @@ class PassportAuthController
          if (auth()->attempt($data)) {
             $response['status'] = true;
             $response['message'] = 'Success';
+            $response['data']['user'] = auth()->user();
+
             $response['data']['token'] = auth()->user()->createToken('Laravel-9-Passport-Auth')->accessToken;;
         } elseif (empty($data)) {
             $response['status'] = true;

@@ -31,7 +31,15 @@ class PaymentTypeController extends Controller {
         $this->paymentType = $paymentType;
       
     }
-   
+    public function show(PaymentType $paymentType):PaymentTypeResource
+    {
+        
+        return (new PaymentTypeResource($paymentType->find(request('id'))))       
+        ->additional(['status' =>"true","statusCode"=>200]);
+
+
+    }
+
     /**
      * List the  payment type  collection '
      * @return Application|PaymentTypeCollection
