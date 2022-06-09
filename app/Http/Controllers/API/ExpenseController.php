@@ -39,11 +39,12 @@ class ExpenseController extends Controller {
     {
         return new ExpenseCollection($this->expense->getFiltered($request->validated()));
     }
-     /**
-      * Store the  expense  collection '
-     * @return Application|PaymentTypeResource
+    /**
+    * Show the  expense  By Id '
+    * @return Application|ExpenseResource
      * @throws Exception
      */
+
 
     public function show(Expense $expense):ExpenseResource
     {

@@ -31,6 +31,11 @@ class PaymentTypeController extends Controller {
         $this->paymentType = $paymentType;
       
     }
+     /**
+    * Show the  PaymentType  By Id '
+    * @return Application|PaymentTypeResource
+     * @throws Exception
+     */
     public function show(PaymentType $paymentType):PaymentTypeResource
     {
         

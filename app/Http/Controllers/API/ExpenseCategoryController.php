@@ -39,6 +39,12 @@ class ExpenseCategoryController extends Controller {
     {
         return new ExpenseCategoryCollection($this->expenseCategory->getFiltered($request->validated()));
     }
+    
+      /**
+    * Show the  expense category By Id '
+    * @return Application|ExpenseCategoryResource
+     * @throws Exception
+     */
 
     public function show(ExpenseCategory $expenseCategory):ExpenseCategoryResource
     {

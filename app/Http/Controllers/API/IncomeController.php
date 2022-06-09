@@ -40,6 +40,12 @@ class IncomeController extends Controller {
         return new IncomeCollection($this->income->getFiltered($request->validated()));
     }
 
+    /**
+    * Show the  Income  By Id '
+    * @return Application|IncomeResource
+     * @throws Exception
+     */
+
     public function show(Income $income):IncomeResource
     {
         return (new IncomeResource($income->find(request('id'))))   
