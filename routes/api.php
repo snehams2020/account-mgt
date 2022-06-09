@@ -43,13 +43,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('get-expense', 'App\Http\Controllers\API\ExpenseController@index');
     Route::post('add-expense', 'App\Http\Controllers\API\ExpenseController@store');
     Route::get('get-an-expense', 'App\Http\Controllers\API\ExpenseController@show');
-
     Route::put('/update-expense', ['as' => 'update-expense', 'uses' => 'App\Http\Controllers\API\ExpenseController@update']);
     Route::delete('/delete-expense',['as' => 'delete-expense', 'uses' => 'App\Http\Controllers\API\ExpenseController@destroy']);
 
     Route::get('get-income-category', 'App\Http\Controllers\API\IncomeCategoryController@index');
     Route::get('get-an-income-category', 'App\Http\Controllers\API\IncomeCategoryController@show');
-
     Route::post('add-income-category', 'App\Http\Controllers\API\IncomeCategoryController@store');
     Route::put('/update-income-category', ['as' => 'update-income-category', 'uses' => 'App\Http\Controllers\API\IncomeCategoryController@update']);
     Route::delete('/delete-income-category',['as' => 'delete-income-category', 'uses' => 'App\Http\Controllers\API\IncomeCategoryController@destroy']);
