@@ -89,7 +89,7 @@ class ExpenseCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(ExpenseCategory $expenseCategory, DestroyRequest $request)
+    public function destroy(ExpenseCategory $expenseCategory, DestroyRequest $request):JsonResponse
     {
         $id     =   request('id');
 

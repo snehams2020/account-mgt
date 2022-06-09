@@ -88,7 +88,7 @@ class IncomeCategoryController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(IncomeCategory $incomeCategory, DestroyRequest $request)
+    public function destroy(IncomeCategory $incomeCategory, DestroyRequest $request):JsonResponse
     {
         $id     =   request('id');
         $del=$incomeCategory->find($id)->delete();

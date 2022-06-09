@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,8 +16,11 @@ class PassportAuthController
    
     /**
      * Login Req
-     */
-    public function login(LoginRequest $request)
+     *  @param  App\Http\Requests\LoginRequest $request
+     * @return Illuminate\Http\JsonResponse
+    */
+    public function login(LoginRequest $request):JsonResponse
+
     {
         $response = ['status' => false, 'message' => 'Failed', 'data' => []];
         $statusCode = 200;
@@ -42,8 +46,12 @@ class PassportAuthController
 
         
     }
+      /**
+     * Get UserInfo by id
+     *@return Illuminate\Http\JsonResponse
+    */
  
-    public function userInfo() 
+    public function userInfo():JsonResponse
     {
  
      $user = auth()->user();

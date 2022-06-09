@@ -92,7 +92,7 @@ class PaymentTypeController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(PaymentType $payment, DestroyRequest $request)
+    public function destroy(PaymentType $payment, DestroyRequest $request):JsonResponse
     {
         $id=request('id');
 

@@ -90,7 +90,7 @@ class ExpenseController extends Controller {
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Expense $expense, DestroyRequest $request)
+    public function destroy(Expense $expense, DestroyRequest $request):JsonResponse
     {
         $id     =   request('id');
         $del    =   $expense->find($id)->delete();
