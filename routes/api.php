@@ -29,14 +29,13 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('get-payment-type', 'App\Http\Controllers\API\PaymentTypeController@getPaymentType');
     Route::get('get-an-payment-type', 'App\Http\Controllers\API\PaymentTypeController@show');
-
     Route::post('add-payment-type', 'App\Http\Controllers\API\PaymentTypeController@store');
     Route::put('/update-payment-type', ['as' => 'update-payment-type', 'uses' => 'App\Http\Controllers\API\PaymentTypeController@update']);
     Route::delete('/delete-payment-type',['as' => 'delete-payment-type', 'uses' => 'App\Http\Controllers\API\PaymentTypeController@destroy']);
 
     Route::get('get-expense-category', 'App\Http\Controllers\API\ExpenseCategoryController@index');
     Route::get('get-an-expense-category', 'App\Http\Controllers\API\ExpenseCategoryController@show');
-     Route::post('add-expense-category', 'App\Http\Controllers\API\ExpenseCategoryController@store');
+    Route::post('add-expense-category', 'App\Http\Controllers\API\ExpenseCategoryController@store');
     Route::put('/update-expense-category', ['as' => 'update-expense-category', 'uses' => 'App\Http\Controllers\API\ExpenseCategoryController@update']);
     Route::delete('/delete-expense-category',['as' => 'delete-expense-category', 'uses' => 'App\Http\Controllers\API\ExpenseCategoryController@destroy']);
 
@@ -55,7 +54,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('get-income', 'App\Http\Controllers\API\IncomeController@index');
     Route::post('add-income', 'App\Http\Controllers\API\IncomeController@store');
     Route::get('get-an-income', 'App\Http\Controllers\API\IncomeController@show');
-
     Route::put('/update-income', ['as' => 'update-income', 'uses' => 'App\Http\Controllers\API\IncomeController@update']);
     Route::delete('/delete-income',['as' => 'delete-income', 'uses' => 'App\Http\Controllers\API\IncomeController@destroy']);
    
