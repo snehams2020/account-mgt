@@ -10,7 +10,7 @@ use App\Models\User;
 use  Laravel\Passport\HasApiTokens;
 use Laravel\Passport\Passport;
 use Auth;
-class ExpenseCategoryTest extends TestCase
+class IncomeTest extends TestCase
 {
     use HasApiTokens, HasFactory;
 
@@ -19,7 +19,7 @@ class ExpenseCategoryTest extends TestCase
      *
      * @return void
      */
-    public function test_list_expense_category()
+    public function test_list_income()
     {
         $user = ['email' => 'admin@gmail.com',
                 'password' => '123456'
@@ -28,22 +28,26 @@ class ExpenseCategoryTest extends TestCase
         Auth::attempt($user);
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
-        $this->json('GET', '/api/get-expense-category', [], $headers)
+        $this->json('GET', '/api/get-income', [], $headers)
             ->assertStatus(200)
             ->assertJsonStructure(['status','statusCode',
-            'expenseCategory' => [
+            'income' => [
                 '*' => [
-                        'id',
-                        'name',
-                        'createdAt',
-                        'updatedAt'
+                    "id",
+                    "description",
+                    "amount",
+                    "income_date",
+                    "created_at",
+                    "incomeCategory",
+                    "paymentType"
+              
                 
                 ]
             ]
               
         ]);
     }
-    public function test_require_name_add_expense_category()
+    public function test_require_add_income()
     {
         $user = ['email' => 'admin@gmail.com',
         'password' => '123456'
@@ -52,15 +56,16 @@ class ExpenseCategoryTest extends TestCase
             Auth::attempt($user);
             $token = Auth::user()->createToken('nfce_client')->accessToken;
             $headers = ['Authorization' => "Bearer $token"];
-            $this->json('POST', '/api/add-expense-category', [], $headers)
+            $this->json('POST', '/api/add-income', [], $headers)
             ->assertStatus(422)                
             ->assertJsonStructure(['success','message',
-            'data' => ['name']
+            'data' => ['amount','payment_type_id','incomecategory_id']
+              
               
         ]);
                         
     }
-    public function test_add_expense_category()
+    public function test_add_income()
     {
         $user = ['email' => 'admin@gmail.com',
                 'password' => '123456'
@@ -69,23 +74,35 @@ class ExpenseCategoryTest extends TestCase
         Auth::attempt($user);
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
-        $data = ['name' => 'test user'];
-        $this->json('POST', '/api/add-expense-category', $data , $headers)
+        $data = [
+            "description"=>"rtertetbmnbmn",
+            "amount"=>"500",
+            "income_date"=>"2022-07-12",
+            "incomecategory_id"=>1,
+            "payment_type_id"=>1
+
+        ];
+        $this->json('POST', '/api/add-income', $data , $headers)
             ->assertStatus(201)
-            ->assertValid(['name'])
+           // ->assertValid(['name'])
             ->assertJsonStructure([
-            'expenseCategory' => [
-                        'id',
-                        'name',
-                        'createdAt',
-                        'updatedAt'
-                ],
-                'status',
-                'statusCode',
+                'income' => [  
+                    "id",
+                    "incomecategory_id",
+                    "payment_type_id",
+                    "description",
+                    "amount",
+                    "income_date",
+                    "createdAt",
+                    "updatedAt"
+               
+                    ],
+        "status",
+        "statusCode"
               
         ]);
     }
-    public function test_require_name_update_expense_category()
+    public function test_require_update_income()
     {
         $user = ['email' => 'admin@gmail.com',
                 'password' => '123456'
@@ -94,7 +111,7 @@ class ExpenseCategoryTest extends TestCase
             Auth::attempt($user);
             $token = Auth::user()->createToken('nfce_client')->accessToken;
             $headers = ['Authorization' => "Bearer $token"];
-            $this->json('put', '/api/update-expense-category', [], $headers)
+            $this->json('put', '/api/update-income', [], $headers)
             ->assertStatus(422)                
             ->assertJsonStructure(['success','message',
             'data' => ['id']
@@ -102,7 +119,7 @@ class ExpenseCategoryTest extends TestCase
         ]);
                         
     }
-    public function test_update_expense_category()
+    public function test_update_expense()
     {
         $user = ['email' => 'admin@gmail.com',
                 'password' => '123456'
@@ -111,23 +128,32 @@ class ExpenseCategoryTest extends TestCase
         Auth::attempt($user);
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
-        $data = ['id'=>'1','name' => 'test user'];
-        $this->json('PUT', '/api/update-expense-category', $data , $headers)
+        $data = ['id'=>'1', 
+                "description"=>"rtertetbmnbmn",
+                "amount"=>"500",
+                "income_date"=>"2022-07-12",
+                "incomecategory_id"=>1,
+                "payment_type_id"=>1
+        ];
+        $this->json('PUT', '/api/update-income', $data , $headers)
             ->assertStatus(200)
             ->assertValid(['id'])
             ->assertJsonStructure([
-            'expenseCategory' => [
-                        'id',
-                        'name',
-                        'createdAt',
-                        'updatedAt'
-                ],
-                'status',
-                'statusCode',
+                'income' => [  
+                    "id",
+                    "incomecategory_id",
+                    "payment_type_id",
+                    "description",
+                    "amount",
+                    "income_date",
+                    "updatedAt"
+                    ],
+        "status",
+        "statusCode"
               
         ]);
     }
-    public function test_delete_expense_category()
+    public function test_delete_income()
     {
         $user = ['email' => 'admin@gmail.com',
                 'password' => '123456'
@@ -137,7 +163,7 @@ class ExpenseCategoryTest extends TestCase
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
         $data = ['id'=>'1'];
-        $this->json('DELETE', '/api/delete-expense-category', $data , $headers)
+        $this->json('DELETE', '/api/delete-income', $data , $headers)
             ->assertStatus(200)
             ->assertValid(['id'])
             ->assertJsonStructure([

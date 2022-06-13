@@ -10,7 +10,7 @@ use App\Models\User;
 use  Laravel\Passport\HasApiTokens;
 use Laravel\Passport\Passport;
 use Auth;
-class ExpenseCategoryTest extends TestCase
+class IncomeCategoryTest extends TestCase
 {
     use HasApiTokens, HasFactory;
 
@@ -28,10 +28,10 @@ class ExpenseCategoryTest extends TestCase
         Auth::attempt($user);
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
-        $this->json('GET', '/api/get-expense-category', [], $headers)
+        $this->json('GET', '/api/get-income-category', [], $headers)
             ->assertStatus(200)
             ->assertJsonStructure(['status','statusCode',
-            'expenseCategory' => [
+            'incomeCategory' => [
                 '*' => [
                         'id',
                         'name',
@@ -52,7 +52,7 @@ class ExpenseCategoryTest extends TestCase
             Auth::attempt($user);
             $token = Auth::user()->createToken('nfce_client')->accessToken;
             $headers = ['Authorization' => "Bearer $token"];
-            $this->json('POST', '/api/add-expense-category', [], $headers)
+            $this->json('POST', '/api/add-income-category', [], $headers)
             ->assertStatus(422)                
             ->assertJsonStructure(['success','message',
             'data' => ['name']
@@ -70,11 +70,11 @@ class ExpenseCategoryTest extends TestCase
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
         $data = ['name' => 'test user'];
-        $this->json('POST', '/api/add-expense-category', $data , $headers)
+        $this->json('POST', '/api/add-income-category', $data , $headers)
             ->assertStatus(201)
             ->assertValid(['name'])
             ->assertJsonStructure([
-            'expenseCategory' => [
+            'incomeCategory' => [
                         'id',
                         'name',
                         'createdAt',
@@ -94,7 +94,7 @@ class ExpenseCategoryTest extends TestCase
             Auth::attempt($user);
             $token = Auth::user()->createToken('nfce_client')->accessToken;
             $headers = ['Authorization' => "Bearer $token"];
-            $this->json('put', '/api/update-expense-category', [], $headers)
+            $this->json('put', '/api/update-income-category', [], $headers)
             ->assertStatus(422)                
             ->assertJsonStructure(['success','message',
             'data' => ['id']
@@ -112,11 +112,11 @@ class ExpenseCategoryTest extends TestCase
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
         $data = ['id'=>'1','name' => 'test user'];
-        $this->json('PUT', '/api/update-expense-category', $data , $headers)
+        $this->json('PUT', '/api/update-income-category', $data , $headers)
             ->assertStatus(200)
             ->assertValid(['id'])
             ->assertJsonStructure([
-            'expenseCategory' => [
+            'incomeCategory' => [
                         'id',
                         'name',
                         'createdAt',
@@ -137,7 +137,7 @@ class ExpenseCategoryTest extends TestCase
         $token = Auth::user()->createToken('nfce_client')->accessToken;
         $headers = ['Authorization' => "Bearer $token"];
         $data = ['id'=>'1'];
-        $this->json('DELETE', '/api/delete-expense-category', $data , $headers)
+        $this->json('DELETE', '/api/delete-income-category', $data , $headers)
             ->assertStatus(200)
             ->assertValid(['id'])
             ->assertJsonStructure([
